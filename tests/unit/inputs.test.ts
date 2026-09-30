@@ -190,4 +190,9 @@ describe("getInputs", () => {
     process.env["INPUT_TIMEOUT-MINUTES"] = "30";
     expect(getInputs().timeoutMinutes).toBe(30);
   });
+
+  it("truncates a fractional timeout to an integer", () => {
+    process.env["INPUT_TIMEOUT-MINUTES"] = "15.9";
+    expect(getInputs().timeoutMinutes).toBe(15);
+  });
 });
