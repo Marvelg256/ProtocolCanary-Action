@@ -112,6 +112,11 @@ describe("getInputs", () => {
     expect(getInputs().network).toBe("testnet");
   });
 
+  it("trims surrounding whitespace from rpc-url", () => {
+    process.env["INPUT_RPC-URL"] = "  https://soroban-testnet.stellar.org  ";
+    expect(getInputs().rpcUrl).toBe("https://soroban-testnet.stellar.org");
+  });
+
   it("treats an all-whitespace network as unset", () => {
     process.env.INPUT_NETWORK = "   ";
     expect(getInputs().network).toBeUndefined();
